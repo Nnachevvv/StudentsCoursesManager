@@ -2,7 +2,12 @@
 
 namespace StudentsCoursesManager.Models.Courses
 {
-    class SoftwareEngineering
+    public class SoftwareEngineering : Course
     {
+        private const int SoftwareCredits = 7;
+        public SoftwareEngineering(string name, string lectuer) 
+            : base(name, lectuer, SoftwareCredits)
+        {
+        }
     }
 }

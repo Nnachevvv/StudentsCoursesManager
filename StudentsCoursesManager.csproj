@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Courses\AppliedMathematics.cs" />
+    <Compile Include="CourseSystem.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Models\Courses\ComputerScience.cs" />
     <Compile Include="Models\Courses\Course.cs" />
     <Compile Include="Models\Courses\Mathematics.cs" />
