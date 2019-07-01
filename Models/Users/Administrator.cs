@@ -4,9 +4,11 @@ namespace StudentsCoursesManager.Models.Users
 {
     public class Administrator : Person
     {
-        protected Administrator(string name, int age, string city) : 
-            base(name, age, city, UserType.Administrator)
+
+        public Administrator(string name, int age, string city,int facultyNumber) : 
+            base(name, age, city, UserType.Administrator,facultyNumber)
         {
+
         }
     }
 }

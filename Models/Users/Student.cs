@@ -1,31 +1,35 @@
-﻿
-
-using System.Collections.Generic;
-using StudentsCoursesManager.Enums
+﻿using System.Collections.Generic;
+using StudentsCoursesManager.Enums;
 using StudentsCoursesManager.Models.Courses;
+using StudentsCoursesManager.Interfaces;
 namespace StudentsCoursesManager.Models.Users
 {
-    public class Student:Person
+    public class Student:Person, IManagerCoureses
     {
-        private HashSet<Course> StudentCourses;
+        private const int MAX_COUNT_COURSES = 7;
 
-        public int FacultyNumber { get; private set; }
+        private Dictionary<string,Course> StudentCourses;
 
-        public Student(string name, int age, string city,int facultyNumber) :
-            base(name, age, city,UserType.Student)
+        public int Credits { get; private set; }
+
+        public Student(string name, int age, string city, int facultyNumber) :
+            base(name, age, city,UserType.Student,facultyNumber)
         {
-            this.FacultyNumber = facultyNumber;
-            this.StudentCourses = new HashSet<Course>();
+            this.StudentCourses = new Dictionary<string, Course>();
         }
 
-        public void AddCourse(Course course)
+
+        public override void AddCourse(Course course)
         {
-            StudentCourses.Add(course);       
+            if (StudentCourses.Count<MAX_COUNT_COURSES)
+            {
+                StudentCourses.Add(course.Name,course);       
+            }
         }
 
-        public void RemoveCourse(Course course)
+        public override void RemoveCourse(string name)
         {
-            StudentCourses.Remove(course);
+                 StudentCourses.Remove(name);
         }
 
         

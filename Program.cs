@@ -6,7 +6,7 @@ namespace StudentsCoursesManager
     {
         public static void Main()
         {
-
+            StudentCoursesSystem coursesSystem=new StudentCoursesSystem();
       
         }
     }

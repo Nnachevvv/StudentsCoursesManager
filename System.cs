@@ -1,8 +1,0 @@
-﻿
-
-namespace StudentsCoursesManager
-{
-    class System
-    {
-    }
-}

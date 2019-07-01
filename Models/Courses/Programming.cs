@@ -1,4 +1,4 @@
-﻿
+﻿using StudentsCoursesManager.Enums;
 
 namespace StudentsCoursesManager.Models.Courses
 {
@@ -6,7 +6,7 @@ namespace StudentsCoursesManager.Models.Courses
     {
         private const int ProgammingCreddits = 5;
         public Programming(string name, string lectuer) : 
-            base(name, lectuer, ProgammingCreddits)
+            base(name, lectuer, ProgammingCreddits,CoursesType.Programming)
         {
         }
     }

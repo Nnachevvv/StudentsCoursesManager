@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using StudentsCoursesManager.Enums;
 namespace StudentsCoursesManager.Models.Courses
 {
     public abstract class  Course
@@ -14,11 +10,35 @@ namespace StudentsCoursesManager.Models.Courses
 
         public  string Lectuer { get; protected set; }
 
-        protected Course(string name, string lectuer, int credits)
+        public CoursesType CourseType { get; private set; }
+        protected Course(string name, string lectuer, int credits,CoursesType courseType)
         {
             this.Name = name;
             this.Lectuer = lectuer;
             this.Credits = credits;
+            this.CourseType = courseType;
+        }
+
+        private string GetCourseType()
+        {
+            switch (CourseType)
+            {
+                case CoursesType.ComputerScience:
+                    return "Computer Science";
+                case CoursesType.Mathematics:
+                    return "Mathematics";
+                case CoursesType.Programming:
+                    return "Programming";
+                case CoursesType.SoftwareEngineering:
+                    return "Software Engineering";
+                default:
+                    return " ";
+            }
+        }
+
+        public void PrintCourse()
+        {
+            Console.WriteLine(GetCourseType() + " " + Name + " " + Lectuer + " " + Credits);
         }
 
     }
