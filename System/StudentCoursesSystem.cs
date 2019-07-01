@@ -60,6 +60,7 @@ namespace StudentsCoursesManager
                         Console.WriteLine("Invalid command!");
                        break;
                 }
+                
                 PrintCommands();
                 currentLine = Console.ReadLine();
                 
@@ -85,66 +86,66 @@ namespace StudentsCoursesManager
 
         private void CreateStudent()
         {
-            Console.WriteLine("Enter Name , Age ,City, Fn");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
-            Student student = new Student(arr[0], int.Parse(arr[1]), arr[2], int.Parse(arr[3]));
+            string[] arr = ReadCommandForUser();
+            int age = GetValidNumber(arr[1], "Age");
+            int FacultyNumber = GetValidNumber(arr[3], "FacultyNumber");
+            Administrator student = new Administrator(arr[0], age, arr[2], FacultyNumber);
             University.AddUser(student);
         }
 
         private void CreateAdministrator()
         {
-            Console.WriteLine("Enter Name , Age ,City, FacultyNumber");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
-            Administrator administrator = new Administrator(arr[0], int.Parse(arr[1]), arr[2], int.Parse(arr[3]));
+            string[] arr = ReadCommandForUser();
+            int age = GetValidNumber(arr[1], "Age");
+            int FacultyNumber = GetValidNumber(arr[3], "FacultyNumber");
+
+            Administrator administrator = new Administrator(arr[0], age, arr[2], FacultyNumber);
             University.AddUser(administrator);
         }
 
         private void RemovePerson()
         {
             Console.WriteLine("Enter FacultyNumber");
-            int fn = int.Parse(Console.ReadLine());
+            string line = Console.ReadLine();
+            int fn = GetValidNumber(line, "Faculty Number"); ;
             University.RemoveUser(fn);
         }
         
         private void AddMathCourse()
         {
-            Console.WriteLine("Enter name, lectuer, AdminFacultyNumber");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
+            string[] arr = ReadCommandForCourses();
             Mathematics course = new Mathematics(arr[0],arr[1]);
-            University.AddCourses(course, int.Parse(arr[2]));
+            int adminFacultyNumber = GetValidNumber(arr[2], "Faculty Number");
+            University.AddCourses(course, adminFacultyNumber);
 
         }
 
         private void AddProgrammingCourse()
         {
-            Console.WriteLine("Enter name, lectuer, AdminFacultyNumber");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
+            string[] arr = ReadCommandForCourses();
             Programming course = new Programming(arr[0], arr[1]);
-            University.AddCourses(course, int.Parse(arr[2]));
+
+            int adminFacultyNumber = GetValidNumber(arr[2], "Faculty Number");
+            University.AddCourses(course, adminFacultyNumber);
 
         }
 
+      
         private void AddComputerScienceCourse()
         {
-            Console.WriteLine("Enter courseName, lectuer, AdminFacultyNumber");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
+            string[] arr = ReadCommandForCourses();
             ComputerScience course = new ComputerScience(arr[0], arr[1]);
-            University.AddCourses(course, int.Parse(arr[2]));
+            int adminFacultyNumber =  GetValidNumber(arr[2],"Faculty Number");
+            University.AddCourses(course, adminFacultyNumber);
 
         }
 
         private void AddSoftwareEngineeringCourse()
         {
-            Console.WriteLine("Enter CourseName,lectuer, AdminId");
-            string line = Console.ReadLine();
-            string[] arr = line.Split(null);
+            string[] arr = ReadCommandForCourses();
             SoftwareEngineering course = new SoftwareEngineering(arr[0], arr[1]);
-            University.AddCourses(course, int.Parse(arr[2]));
+            int adminFacultyNumber = GetValidNumber(arr[2], "Faculty Number");
+            University.AddCourses(course, adminFacultyNumber);
         }
         
         private void RemoveCourse()
@@ -152,7 +153,8 @@ namespace StudentsCoursesManager
             Console.WriteLine("Enter CourseName ,AdminFacultyNumber");
             string line = Console.ReadLine();
             string[] arr = line.Split(null);
-            University.RemoveCourse(arr[0], int.Parse(arr[1]));
+            int adminFacultyNumber = GetValidNumber(arr[2], "Faculty Number");
+            University.RemoveCourse(arr[0], adminFacultyNumber);
         }
 
         private void AddCourseToStudent()
@@ -160,7 +162,8 @@ namespace StudentsCoursesManager
             Console.WriteLine("Enter CouseName ,AdminFacultyNumber");
             string line = Console.ReadLine();
             string[] arr = line.Split(null);
-            University.StudentTakeCourse(arr[0], int.Parse(arr[1]));
+            int adminFacultyNumber = GetValidNumber(arr[2], "Faculty Number");
+            University.StudentTakeCourse(arr[0], adminFacultyNumber);
         }
 
         private void PrintAllCourses()
@@ -172,5 +175,32 @@ namespace StudentsCoursesManager
         {
             University.PrintStudents();
         }
+        private int GetValidNumber(string numbParse, string messege)
+        {
+            int number;
+            while (!int.TryParse(numbParse, out number))
+            {
+                Console.WriteLine("Enter valid " + messege + " !");
+                numbParse = Console.ReadLine();
+            }
+            return number;
+        }
+
+        private string[] ReadCommandForCourses()
+        {
+            Console.WriteLine("Enter courseName, lectuer, AdminFacultyNumber");
+            string line = Console.ReadLine();
+            string[] arr = line.Split(null);
+            return arr;
+        }
+
+        private string[] ReadCommandForUser()
+        {
+            Console.WriteLine("Enter Name , Age ,City, FacultyNumber");
+            string line = Console.ReadLine();
+            string[] arr = line.Split(null);
+            return arr;
+        }
+
     }
 }
