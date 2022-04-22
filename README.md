@@ -1,5 +1,5 @@
 # StudentCoursesManager 
-## Project for the High Quality Code course at FMI
+## Project for the High Quality Code course in FMI
 
 - **Students** have a `name`, `age` , ' city' and a collection of `courses`. 
 - **Administrator** have a `name`, `age` , ' city' and can create/remove `courses`.
